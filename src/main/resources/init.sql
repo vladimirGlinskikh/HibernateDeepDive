@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS product CASCADE;
 CREATE TABLE product
 (
-    id   INT         NOT NULL PRIMARY KEY,
+    id   SERIAL      NOT NULL PRIMARY KEY,
     name VARCHAR(45) NULL
 );
 
