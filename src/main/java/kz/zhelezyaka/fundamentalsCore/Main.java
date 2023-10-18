@@ -27,17 +27,12 @@ public class Main {
             Employee employee = entityManager.find(Employee.class, 1);
             Product product = entityManager.find(Product.class, 1);
 
-            entityManager.remove(employee);
-
-            Employee employee1 = new Employee();
-            employee1.setId(1);
-            employee1.setName("Vladimir Glinskikh");
-            employee1.setAddress("Kovaleva 56");
-            entityManager.persist(employee1);
-
-            System.out.println(employee);
-            System.out.println(employee1);
-            System.out.println(product);
+//            entityManager.persist(); Adding on entity in the context
+//            entityManager.find(); Finds by Primary Key, Get from Database and add it to the context if it doesn't already exist
+//            entityManager.remove(); Marking entity for removal
+//            entityManager.merge(); Merges an entity from outside the context to the context
+//            entityManager.refresh(); Mirror the context from the database
+//            entityManager.detach(); Taking the entity out of the context
 
             entityManager.getTransaction().commit();
         }
