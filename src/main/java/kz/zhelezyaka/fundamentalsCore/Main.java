@@ -26,6 +26,8 @@ public class Main {
 
             Employee employee = entityManager.find(Employee.class, 1);
             Product product = entityManager.find(Product.class, 1);
+            employee.setName("Vladimir Glinskikh");
+            employee.setName("Svetlana Svetina");
             System.out.println(employee);
             System.out.println(product);
             entityManager.getTransaction().commit();
