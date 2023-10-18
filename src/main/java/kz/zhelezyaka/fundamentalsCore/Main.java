@@ -26,10 +26,19 @@ public class Main {
 
             Employee employee = entityManager.find(Employee.class, 1);
             Product product = entityManager.find(Product.class, 1);
-            employee.setName("Vladimir Glinskikh");
-            employee.setName("Svetlana Svetina");
+
+            entityManager.remove(employee);
+
+            Employee employee1 = new Employee();
+            employee1.setId(1);
+            employee1.setName("Vladimir Glinskikh");
+            employee1.setAddress("Kovaleva 56");
+            entityManager.persist(employee1);
+
             System.out.println(employee);
+            System.out.println(employee1);
             System.out.println(product);
+
             entityManager.getTransaction().commit();
         }
     }
