@@ -13,6 +13,13 @@ import java.util.List;
 import java.util.Properties;
 
 public class CustomPersistenceUnitInfo implements PersistenceUnitInfo {
+    private final String persistentUnitName;
+
+    public CustomPersistenceUnitInfo(String persistentUnitName) {
+        this.persistentUnitName = persistentUnitName;
+    }
+
+
     @Override
     public String getPersistenceUnitName() {
         return "persistence";
@@ -59,7 +66,8 @@ public class CustomPersistenceUnitInfo implements PersistenceUnitInfo {
 
     @Override
     public List<String> getManagedClassNames() {
-        return List.of("kz.zhelezyaka.fundamentalsCore.entities.Product");
+        return List.of("kz.zhelezyaka.fundamentalsCore.entities.Employee",
+                "kz.zhelezyaka.fundamentalsCore.entities.Product");
     }
 
     @Override

@@ -2,30 +2,32 @@ package kz.zhelezyaka.fundamentalsCore;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.Persistence;
+import kz.zhelezyaka.fundamentalsCore.entities.Employee;
 import kz.zhelezyaka.fundamentalsCore.entities.Product;
 import kz.zhelezyaka.fundamentalsCore.persistence.CustomPersistenceUnitInfo;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
 import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
     public static void main(String[] args) {
-//        EntityManagerFactory entityManagerFactory =
-//                Persistence.createEntityManagerFactory("persistence");
+        String persistentUnitName = "persistence_Unit_Name";
+        Map<?, ?> props = new HashMap<>();
 
         EntityManagerFactory entityManagerFactory =
                 new HibernatePersistenceProvider()
                         .createContainerEntityManagerFactory(
-                                new CustomPersistenceUnitInfo(), new HashMap<>());
+                                new CustomPersistenceUnitInfo(persistentUnitName), props);
 
         try (EntityManager entityManager =
                      entityManagerFactory.createEntityManager()) {
             entityManager.getTransaction().begin();
 
-            Product product = new Product();
-            product.setName("Champagne");
-            entityManager.persist(product);
+            Employee employee = entityManager.find(Employee.class, 1);
+            Product product = entityManager.find(Product.class, 1);
+            System.out.println(employee);
+            System.out.println(product);
             entityManager.getTransaction().commit();
         }
     }
