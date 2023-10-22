@@ -4,6 +4,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import kz.zhelezyaka.fundamentalsCore.entities.Employee;
 import kz.zhelezyaka.fundamentalsCore.entities.Product;
+import kz.zhelezyaka.fundamentalsCore.entities.Student;
+import kz.zhelezyaka.fundamentalsCore.keys.StudentKey;
 import kz.zhelezyaka.fundamentalsCore.persistence.CustomPersistenceUnitInfo;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
@@ -16,7 +18,7 @@ public class Main {
         Map<String, String> props = new HashMap<>();
 
         props.put("hibernate.show_sql", "true");
-        props.put("hibernate.hbm2ddl.auto", "update");
+        props.put("hibernate.hbm2ddl.auto", "none");
 
         EntityManagerFactory entityManagerFactory =
                 new HibernatePersistenceProvider()
@@ -27,33 +29,31 @@ public class Main {
                      entityManagerFactory.createEntityManager()) {
             entityManager.getTransaction().begin();
 
-//            Employee employee = entityManager.find(Employee.class, 1);
-//            Product product = entityManager.find(Product.class, 1);
-
-//            var employee1 = new Employee();
-//            employee1.setId(2);
-//            employee1.setAddress("Address");
-//            employee1.setName("Nikolay");
+//            Employee employee1 = new Employee();
+//            employee1.setName("some name");
+//            employee1.setAddress("some address");
 //
 //            entityManager.persist(employee1);
 //
-//            employee1 = entityManager.find(Employee.class, 2);
-//            System.out.println(employee1);
+//            Product product = new Product();
+//            product.setCode("Some Code");
+//            product.setNumber(11L);
+//            product.setName("Vladimir");
+//
+//            entityManager.persist(product);
 
-            var employee1 = entityManager.getReference(Employee.class, 1);
-            System.out.println(employee1);
-            employee1.setId(1);
-            employee1.setName("Nina");
-            System.out.println("Before: " + employee1);
-            entityManager.refresh(employee1);
-            System.out.println("After: " + employee1);
+            StudentKey studentKey = new StudentKey();
+            studentKey.setCode("some student code");
+            studentKey.setNumber(119);
 
-//            entityManager.persist(); Adding on entity in the context
-//            entityManager.find(); Finds by Primary Key, Get from Database and add it to the context if it doesn't already exist
-//            entityManager.remove(); Marking entity for removal
-//            entityManager.merge(); Merges an entity from outside the context to the context
-//            entityManager.refresh(); Mirror the context from the database
-//            entityManager.detach(); Taking the entity out of the context
+//            Student student = new Student();
+//            student.setId(studentKey);
+//            student.setName("some student");
+//
+//            entityManager.persist(student);
+
+            Student student = entityManager.find(Student.class, studentKey);
+            System.out.println(student);
 
             entityManager.getTransaction().commit();
         }

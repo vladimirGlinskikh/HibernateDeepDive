@@ -1,23 +1,19 @@
 package kz.zhelezyaka.fundamentalsCore.entities;
 
 import jakarta.persistence.*;
+import kz.zhelezyaka.fundamentalsCore.keys.ProductKey;
 
 @Entity
+@IdClass(ProductKey.class)
 @Table(name = "product")
 public class Product {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String code;
+
+    @Id
+    private Long number;
     private String name;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -27,11 +23,19 @@ public class Product {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "Product{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+    public String getCode() {
+        return code;
+    }
+
+    public void setCode(String code) {
+        this.code = code;
+    }
+
+    public Long getNumber() {
+        return number;
+    }
+
+    public void setNumber(Long number) {
+        this.number = number;
     }
 }
