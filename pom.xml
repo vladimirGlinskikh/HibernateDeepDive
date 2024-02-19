@@ -71,12 +71,6 @@
             <groupId>org.liquibase</groupId>
             <artifactId>liquibase-core</artifactId>
             <version>4.25.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.liquibase</groupId>
-                    <artifactId>liquibase-commercial</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
     </dependencies>
 
