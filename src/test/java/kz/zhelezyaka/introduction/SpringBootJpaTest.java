@@ -2,10 +2,11 @@ package kz.zhelezyaka.introduction;
 
 import kz.zhelezyaka.introduction.domain.Employee;
 import kz.zhelezyaka.introduction.repositories.EmployeeRepository;
-import org.junit.FixMethodOrder;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
-import org.junit.runners.MethodSorters;
+import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.testcontainers.containers.PostgreSQLContainer;
@@ -14,20 +15,22 @@ import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
 @Testcontainers
-@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 class SpringBootJpaTest {
 
     @Container
-    public PostgreSQLContainer<?> pgsql =
+    public static PostgreSQLContainer<?> pgsql =
             new PostgreSQLContainer<>("postgres:latest");
+
 
     @Autowired
     EmployeeRepository employeeRepository;
 
     long start = System.currentTimeMillis();
 
+    @Order(2)
     @Test
     void shouldSaveEmployee() {
         var countBefore = employeeRepository.findAll();
@@ -39,6 +42,7 @@ class SpringBootJpaTest {
         assertThat(countAfter).hasSize(1);
     }
 
+    @Order(1)
     @Test
     void shouldDeleteAllEmployee() {
         employeeRepository.deleteAll();
