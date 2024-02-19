@@ -22,8 +22,8 @@ public class DataInitializer implements CommandLineRunner {
     public void run(String... args) throws Exception {
         Employee vladimir = new Employee(1L, "Vladimir", "Sadovaya 23");
         Employee svetlana = new Employee(2L, "Svetlana", "Kotanova 34");
-        Product beer = new Product(1L, "Beer");
-        Product wine = new Product(2L, "Wine");
+        Product beer = new Product(1L, "Beer", null);
+        Product wine = new Product(2L, "Wine", null);
 
         Employee vladSave = employeeRepository.save(vladimir);
         Employee svetlanaSave = employeeRepository.save(svetlana);

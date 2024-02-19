@@ -6,5 +6,6 @@
   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
     <include file="db/changelog/baseline-changelog.xml"/>
+    <include file="db/changelog/add-employee-id-to-product.xml"/>
 
 </databaseChangeLog>
