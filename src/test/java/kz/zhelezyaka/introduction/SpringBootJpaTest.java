@@ -9,12 +9,14 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.jdbc.Sql;
 import org.testcontainers.containers.PostgreSQLContainer;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+//@Sql("classpath:sql/employee_test.sql")
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 @SpringBootTest
 @Testcontainers
@@ -23,8 +25,6 @@ class SpringBootJpaTest {
     @Container
     public static PostgreSQLContainer<?> pgsql =
             new PostgreSQLContainer<>("postgres:latest");
-
-
     @Autowired
     EmployeeRepository employeeRepository;
 

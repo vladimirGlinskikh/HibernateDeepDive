@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: liquibase/scripts/2024_02_20_migrations_V1_init_database.sql
+encoding: "UTF-8"
