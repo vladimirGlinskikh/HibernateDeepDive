@@ -1,4 +1,5 @@
 databaseChangeLog:
-  - include:
-      file: liquibase/scripts/2024_02_20_migrations_V1_init_database.sql
+  - includeAll:
+      path: liquibase/scripts/
+      suffix: .sql
 encoding: "UTF-8"

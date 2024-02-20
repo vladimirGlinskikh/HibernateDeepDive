@@ -20,10 +20,10 @@ public class DataInitializer implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Employee vladimir = new Employee(1L, "Vladimir", "Sadovaya 23");
-        Employee svetlana = new Employee(2L, "Svetlana", "Kotanova 34");
-        Product beer = new Product(1L, "Beer");
-        Product wine = new Product(2L, "Wine");
+        Employee vladimir = new Employee(null, "Vladimir", "Sadovaya 23");
+        Employee svetlana = new Employee(null, "Svetlana", "Kotanova 34");
+        Product beer = new Product(null, "Beer");
+        Product wine = new Product(null,"Wine");
 
         Employee vladSave = employeeRepository.save(vladimir);
         Employee svetlanaSave = employeeRepository.save(svetlana);
