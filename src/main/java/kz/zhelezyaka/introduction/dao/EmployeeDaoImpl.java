@@ -51,9 +51,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return entityManager.find(Employee.class, employee.getId());
     }
 
+    @Transactional
     @Override
     public void deleteEmployeeById(UUID id) {
-
+        EntityManager entityManager = getEntityManager();
+        entityManager.joinTransaction();
+        Employee employee = entityManager.find(Employee.class, id);
+        entityManager.remove(employee);
+        entityManager.flush();
     }
 
     private EntityManager getEntityManager() {

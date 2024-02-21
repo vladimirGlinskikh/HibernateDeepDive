@@ -17,6 +17,20 @@ class IntroductionJpaApplicationTest {
     EmployeeDao employeeDao;
 
     @Test
+    void testDeleteEmployee() {
+        Employee employee = new Employee();
+        employee.setName("Vladimir");
+
+        Employee saved = employeeDao.saveNewEmployee(employee);
+        employeeDao.deleteEmployeeById(saved.getId());
+
+        Employee deleted = employeeDao.getById(saved.getId());
+
+        assertThat(deleted).isNull();
+        assertThat(employeeDao.getById(saved.getId()));
+    }
+
+    @Test
     void testUpdateEntity() {
         Employee employee = new Employee();
         employee.setName("Alexandr");
