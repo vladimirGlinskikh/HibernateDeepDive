@@ -17,6 +17,16 @@ class IntroductionJpaApplicationTest {
     EmployeeDao employeeDao;
 
     @Test
+    void testSaveEmployee() {
+        Employee employee = new Employee();
+        employee.setName("Vladimir");
+        Employee saved = employeeDao.saveNewEmployee(employee);
+
+        assertThat(saved).isNotNull();
+        assertThat(saved.getId()).isNotNull();
+    }
+
+    @Test
     void testGetEmployeeByName() {
         Employee employee = employeeDao.findEmployeeByName("Svetlana");
         assertThat(employee).isNotNull();

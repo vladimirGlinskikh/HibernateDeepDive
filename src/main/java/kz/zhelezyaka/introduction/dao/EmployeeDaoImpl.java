@@ -3,6 +3,7 @@ package kz.zhelezyaka.introduction.dao;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import kz.zhelezyaka.introduction.domain.Employee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -29,9 +30,14 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return query.getSingleResult();
     }
 
+    @Transactional
     @Override
     public Employee saveNewEmployee(Employee employee) {
-        return null;
+        EntityManager entityManager = getEntityManager();
+        entityManager.joinTransaction();
+        entityManager.persist(employee);
+        entityManager.flush();
+        return employee;
     }
 
     @Override
