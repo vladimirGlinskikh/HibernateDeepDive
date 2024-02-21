@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.List;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -15,6 +16,14 @@ class IntroductionJpaApplicationTest {
 
     @Autowired
     EmployeeDao employeeDao;
+
+    @Test
+    void testListEmployeeByName() {
+        List<Employee> employees = employeeDao.listEmployeeByName("Vlad");
+
+        assertThat(employees).isNotNull();
+        assertThat(employees.size()).isGreaterThan(0);
+    }
 
     @Test
     void testDeleteEmployee() {

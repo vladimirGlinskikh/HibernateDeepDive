@@ -2,12 +2,16 @@ package kz.zhelezyaka.introduction.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
 import kz.zhelezyaka.introduction.domain.Employee;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.collections4.iterators.EmptyOrderedIterator;
 import org.springframework.stereotype.Component;
 
+import java.util.List;
+import java.util.Queue;
 import java.util.UUID;
 
 @Component
@@ -15,6 +19,21 @@ import java.util.UUID;
 public class EmployeeDaoImpl implements EmployeeDao {
 
     private final EntityManagerFactory entityManagerFactory;
+
+    @Override
+    public List<Employee> listEmployeeByName(String name) {
+        EntityManager entityManager = getEntityManager();
+
+        try {
+            Query query = entityManager
+                            .createQuery("SELECT e FROM Employee e WHERE e.name like :name");
+            query.setParameter("name", name + "%");
+            List<Employee> employees = query.getResultList();
+            return employees;
+        } finally {
+            entityManager.close();
+        }
+    }
 
     @Override
     public Employee getById(UUID id) {
