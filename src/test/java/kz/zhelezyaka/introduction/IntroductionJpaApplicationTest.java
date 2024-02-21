@@ -17,6 +17,18 @@ class IntroductionJpaApplicationTest {
     EmployeeDao employeeDao;
 
     @Test
+    void testUpdateEntity() {
+        Employee employee = new Employee();
+        employee.setName("Alexandr");
+
+        Employee saved = employeeDao.saveNewEmployee(employee);
+        saved.setName("Egor");
+        Employee updated = employeeDao.updateEmployee(saved);
+
+        assertThat(updated.getName()).isEqualTo("Egor");
+    }
+
+    @Test
     void testSaveEmployee() {
         Employee employee = new Employee();
         employee.setName("Vladimir");

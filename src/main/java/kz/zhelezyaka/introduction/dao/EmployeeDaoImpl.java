@@ -40,9 +40,15 @@ public class EmployeeDaoImpl implements EmployeeDao {
         return employee;
     }
 
+    @Transactional
     @Override
     public Employee updateEmployee(Employee employee) {
-        return null;
+        EntityManager entityManager = getEntityManager();
+        entityManager.joinTransaction();
+        entityManager.merge(employee);
+        entityManager.flush();
+        entityManager.clear();
+        return entityManager.find(Employee.class, employee.getId());
     }
 
     @Override
