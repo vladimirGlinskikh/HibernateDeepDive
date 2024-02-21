@@ -17,6 +17,12 @@ class IntroductionJpaApplicationTest {
     EmployeeDao employeeDao;
 
     @Test
+    void testGetEmployeeByName() {
+        Employee employee = employeeDao.findEmployeeByName("Svetlana");
+        assertThat(employee).isNotNull();
+    }
+
+    @Test
     void testGetEmployee() {
         Employee employee = employeeDao
                 .getById(UUID.fromString("e10410fb-6ca0-45fc-aa84-df4b665a0e15"));

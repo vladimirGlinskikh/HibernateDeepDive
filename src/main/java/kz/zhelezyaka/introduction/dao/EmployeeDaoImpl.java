@@ -2,6 +2,7 @@ package kz.zhelezyaka.introduction.dao;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.TypedQuery;
 import kz.zhelezyaka.introduction.domain.Employee;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -21,7 +22,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee findEmployeeByName(String name) {
-        return null;
+        TypedQuery<Employee> query =
+                getEntityManager().createQuery("SELECT e FROM Employee e " +
+                        "WHERE e.name = :name", Employee.class);
+        query.setParameter("name", name);
+        return query.getSingleResult();
     }
 
     @Override
