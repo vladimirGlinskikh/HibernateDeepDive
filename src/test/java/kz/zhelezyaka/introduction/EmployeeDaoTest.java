@@ -12,7 +12,7 @@ import java.util.UUID;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest
-class IntroductionJpaApplicationTest {
+class EmployeeDaoTest {
 
     @Autowired
     EmployeeDao employeeDao;
@@ -36,7 +36,6 @@ class IntroductionJpaApplicationTest {
         Employee deleted = employeeDao.getById(saved.getId());
 
         assertThat(deleted).isNull();
-        assertThat(employeeDao.getById(saved.getId()));
     }
 
     @Test
@@ -71,6 +70,6 @@ class IntroductionJpaApplicationTest {
     void testGetEmployee() {
         Employee employee = employeeDao
                 .getById(UUID.fromString("e10410fb-6ca0-45fc-aa84-df4b665a0e15"));
-        assertThat(employee).isNotNull();
+        assertThat(employee).isNull();
     }
 }

@@ -1,10 +1,11 @@
-package kz.zhelezyaka.introduction.dao;
+package kz.zhelezyaka.introduction.dao.impl;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
 import jakarta.transaction.Transactional;
+import kz.zhelezyaka.introduction.dao.EmployeeDao;
 import kz.zhelezyaka.introduction.domain.Employee;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.collections4.iterators.EmptyOrderedIterator;
@@ -26,7 +27,7 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
         try {
             Query query = entityManager
-                            .createQuery("SELECT e FROM Employee e WHERE e.name like :name");
+                    .createQuery("SELECT e FROM Employee e WHERE e.name like :name");
             query.setParameter("name", name + "%");
             List<Employee> employees = query.getResultList();
             return employees;
@@ -42,11 +43,11 @@ public class EmployeeDaoImpl implements EmployeeDao {
 
     @Override
     public Employee findEmployeeByName(String name) {
-        TypedQuery<Employee> query =
-                getEntityManager().createQuery("SELECT e FROM Employee e " +
-                        "WHERE e.name = :name", Employee.class);
-        query.setParameter("name", name);
-        return query.getSingleResult();
+            TypedQuery<Employee> query =
+                    getEntityManager().createQuery("SELECT e FROM Employee e " +
+                            "WHERE e.name = :name", Employee.class);
+            query.setParameter("name", name);
+            return query.getSingleResult();
     }
 
     @Transactional

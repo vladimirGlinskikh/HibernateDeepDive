@@ -5,6 +5,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,7 @@ import java.util.UUID;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@NamedQuery(name = "product_find_all", query = "FROM Product")
 public class Product {
 
     @Id
@@ -26,5 +28,8 @@ public class Product {
             updatable = false,
             nullable = false)
     private UUID id;
+
     private String name;
+
+    private Long quantity;
 }
